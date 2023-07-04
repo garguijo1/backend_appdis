@@ -5,7 +5,7 @@ const verificador = require("./../verificaciones//verificador");
 const router = express.Router();
 const service = new platillosServices();
 
-router.get('/',verificador, async (req,res) =>{
+router.get('/listar-platillos',verificador, async (req,res) =>{
     const platillos = await service.find();
     // console.log(platillos);
     res.json({
@@ -15,7 +15,7 @@ router.get('/',verificador, async (req,res) =>{
 });
 
 
-router.get('/:idPlatillo',verificador,async (req,res) =>{
+router.get('/buscar-platillo/:idPlatillo',verificador,async (req,res) =>{
     try{
         const { idPlatillo } = req.params;
         const platillo = await service.findOne(idPlatillo);
@@ -30,7 +30,7 @@ router.get('/:idPlatillo',verificador,async (req,res) =>{
     
 });
 
-router.post('/crear',verificador,async (req,res) =>{
+router.post('/crear-platillo',verificador,async (req,res) =>{
     const body = req.body;
     const respuesta = await service.create(body);
 
@@ -44,7 +44,7 @@ router.post('/crear',verificador,async (req,res) =>{
     });
 });
 
-router.put('/modificar/:idPlatillo',verificador,async (req,res)=>{
+router.put('/actualizar-platillo/:idPlatillo',verificador,async (req,res)=>{
 
     try{
         const {idPlatillo} = req.params;
@@ -67,7 +67,7 @@ router.put('/modificar/:idPlatillo',verificador,async (req,res)=>{
 });
 
 
-router.delete('/eliminar/:idPlatillo',verificador,async (req,res)=>{
+router.delete('/eliminar-platillo/:idPlatillo',verificador,async (req,res)=>{
     const {idPlatillo} = req.params;
     const rpta = await service.delete(idPlatillo);
     

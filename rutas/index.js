@@ -9,8 +9,8 @@ const sedesRutas = require('./sedesRutas.js');
 
 function routerApi(app){
     const router = express.Router();
-    app.use('/api/v1',router);
-        router.use('/platillos',platillosRutas);
+    app.use('/',router);
+        router.use('/ux-gestion-platillos/bstk/servicio-al-cliente/v1',platillosRutas);
         router.use('/clientes',clientesRutas);
         router.use('/usuarios',usuariosRutas);
         router.use('/reservaciones',reservacionesRutas);
