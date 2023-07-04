@@ -5,7 +5,7 @@ const verificador = require("./../verificaciones//verificador");
 const router = express.Router();
 const service = new categoriasService();
 
-router.get('/',verificador,async (req,res) =>{
+router.get('/listar-categorias',verificador,async (req,res) =>{
 
     const categorias = await service.find();
     console.log(categorias);

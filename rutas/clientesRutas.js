@@ -5,14 +5,14 @@ const verificador = require("./../verificaciones//verificador");
 const router = express.Router();
 const service = new clientesService();
 
-router.get('/',verificador,async (req,res) =>{
+router.get('/listar-clientes',verificador,async (req,res) =>{
 
     const clientes = await service.find();
     console.log(clientes);
     res.json(clientes);
 });
 
-router.get('/:idCliente',verificador,async (req,res) =>{
+router.get('/buscar-cliente/:idCliente',verificador,async (req,res) =>{
     try{
         const { idCliente } = req.params;
         const cliente = await service.findOne(idCliente);
@@ -25,7 +25,7 @@ router.get('/:idCliente',verificador,async (req,res) =>{
     
 });
 
-router.post('/crear',async (req,res) =>{
+router.post('/crear-cliente',async (req,res) =>{
     const body = req.body;
     const resCliente = await service.create(body);
 
@@ -49,7 +49,7 @@ router.post('/login',async (req,res) =>{
     });
 });
 
-router.put('/modificar/:idCliente',verificador,async (req,res)=>{
+router.put('/modificar-cliente/:idCliente',verificador,async (req,res)=>{
 
     try{
         const {idCliente} = req.params;
@@ -61,7 +61,7 @@ router.put('/modificar/:idCliente',verificador,async (req,res)=>{
     }  
 });
 
-router.delete('/eliminar/:idCliente',verificador,async (req,res)=>{
+router.delete('/eliminar-cliente/:idCliente',verificador,async (req,res)=>{
     const {idCliente} = req.params;
     const rpta = await service.delete(idCliente);
     res.json(rpta);

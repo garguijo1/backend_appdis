@@ -5,14 +5,14 @@ const validar = require('../verificaciones/verificador.js');
 const router = express.Router();
 const service = new usuariosService();
 
-router.get('/',validar,async (req,res) =>{
+router.get('/listar-usuarios',validar,async (req,res) =>{
 
     const clientes = await service.find();
     console.log(clientes);
     res.json(clientes);
 });
 
-router.get('/:idCliente',validar,async (req,res) =>{
+router.get('/buscar-usuario/:idCliente',validar,async (req,res) =>{
     try{
         const { idCliente } = req.params;
         const platillo = await service.findOne(idCliente);
@@ -23,7 +23,7 @@ router.get('/:idCliente',validar,async (req,res) =>{
     
 });
 
-router.get('/menu/:idRol',validar,async (req,res) =>{
+router.get('/listar-opciones-menu/:idRol',validar,async (req,res) =>{
     try{
         const { idRol } = req.params;
         const menu = await service.menu(idRol);
@@ -35,7 +35,7 @@ router.get('/menu/:idRol',validar,async (req,res) =>{
     
 });
 
-router.post('/crear',validar,async (req,res) =>{
+router.post('/crear-usuario',validar,async (req,res) =>{
     const body = req.body;
     const respuestaUsuario = await service.create(body);
     
@@ -75,7 +75,7 @@ router.put('/deslogin/:idUsuario',validar,async (req,res) =>{
 
 
 
-router.put('/modificar/:idUsuario',async (req,res)=>{
+router.put('/modificar-usuario/:idUsuario',async (req,res)=>{
 
     try{
         const {idUsuario} = req.params;
@@ -87,7 +87,7 @@ router.put('/modificar/:idUsuario',async (req,res)=>{
     }  
 });
 
-router.delete('/eliminar/:idUsuario',async (req,res)=>{
+router.delete('/eliminar-usuario/:idUsuario',async (req,res)=>{
     const {idUsuario} = req.params;
     const rpta = await service.delete(idUsuario);
     res.json(rpta);

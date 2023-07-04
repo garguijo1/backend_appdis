@@ -5,13 +5,13 @@ const verificador = require("./../verificaciones//verificador");
 const router = express.Router();
 const service = new reservacionesServices();
 
-router.get('/',verificador, async (req,res) =>{
+router.get('/listar-reservaciones',verificador, async (req,res) =>{
     const reservaciones = await service.find();
     res.json(reservaciones);
 });
 
 
-router.get('/:idReservacion',verificador,async (req,res) =>{
+router.get('/buscar-reservacion/:idReservacion',verificador,async (req,res) =>{
     try{
         const { idReservacion } = req.params;
         const reservacion = await service.findOne(idReservacion);
@@ -22,7 +22,7 @@ router.get('/:idReservacion',verificador,async (req,res) =>{
     
 });
 
-router.get('/cliente/:idCliente',verificador,async (req,res) =>{
+router.get('/listar-reservaciones-cliente/:idCliente',verificador,async (req,res) =>{
     try{
         const { idCliente } = req.params;
         const reservaciones = await service.findClient(idCliente);
@@ -35,6 +35,8 @@ router.get('/cliente/:idCliente',verificador,async (req,res) =>{
     }
     
 });
+
+// pasa a reportes
 
 router.get('/sede/:idSede',verificador,async (req,res) =>{
     try{
@@ -61,7 +63,8 @@ router.post('/filtrar',verificador,async (req,res) =>{
     
 });
 
-router.post('/crear',verificador,async (req,res) =>{
+//-------------------------------------------------------------
+router.post('/crear-reservacion',verificador,async (req,res) =>{
     const body = req.body;
     console.log("creando la reservacion");
     const newReservacion = await service.create(body);
@@ -82,7 +85,7 @@ router.post('/crear',verificador,async (req,res) =>{
     });
 });
 
-router.post('/agregarPlatillo',verificador,async (req,res) =>{
+router.post('/agregar-platillos-reservacion',verificador,async (req,res) =>{
     const body = req.body;
     const respuesta = await service.addPlatillo(body);
     let mensaje = "error en agregar platillo";
@@ -108,7 +111,7 @@ router.put('/atender/:idReservacion',verificador,async (req,res)=>{
     
 });
 
-router.get('/validarHorario/:idSede',verificador,async (req,res)=>{
+router.get('/validar-horario/:idSede',verificador,async (req,res)=>{
     const {idSede} = req.params
     const horario = req.body.horario;
 
@@ -132,23 +135,7 @@ router.get('/detallar/:idReservacion',verificador,async (req,res)=>{
      
 });
 
-
-router.put('/modificar/:idReservacion',verificador,async (req,res)=>{
-
-    // try{
-    //     const {idPlatillo} = req.params;
-    //     const body = req.body;
-    //     const platillo = await service.update(idPlatillo, body);
-    //     console.log(platillo);
-    //     res.json(platillo);
-    // }catch(error){
-    //     console.log(error);
-    // }
-
-});
-
-
-router.delete('/eliminar/:idRservacion',verificador,async (req,res)=>{
+router.delete('/eliminar-reservacion/:idRservacion',verificador,async (req,res)=>{
     // const {idPlatillo} = req.params;
     // const rpta = await service.delete(idPlatillo);
     // res.json(rpta);
