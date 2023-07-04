@@ -6,7 +6,7 @@ const validarAccion = require("./../verificaciones/validarAcciones");
 const router = express.Router();
 const service = new sedesService();
 
-router.get('/',validarAccion,verificador,async (req,res) =>{
+router.get('/',verificador,async (req,res) =>{
 
     const sedes = await service.find();
     console.log(sedes);

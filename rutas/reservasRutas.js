@@ -1,18 +1,17 @@
 const express = require('express');
 const reservacionesServices = require('./../servicios/reservasService.js');
 const verificador = require("./../verificaciones//verificador");
-const validarAccion = require("./../verificaciones/validarAcciones");
 
 const router = express.Router();
 const service = new reservacionesServices();
 
-router.get('/',validarAccion,verificador, async (req,res) =>{
+router.get('/',verificador, async (req,res) =>{
     const reservaciones = await service.find();
     res.json(reservaciones);
 });
 
 
-router.get('/:idReservacion',validarAccion,verificador,async (req,res) =>{
+router.get('/:idReservacion',verificador,async (req,res) =>{
     try{
         const { idReservacion } = req.params;
         const reservacion = await service.findOne(idReservacion);
@@ -23,7 +22,7 @@ router.get('/:idReservacion',validarAccion,verificador,async (req,res) =>{
     
 });
 
-router.get('/cliente/:idCliente',validarAccion,verificador,async (req,res) =>{
+router.get('/cliente/:idCliente',verificador,async (req,res) =>{
     try{
         const { idCliente } = req.params;
         const reservaciones = await service.findClient(idCliente);
@@ -37,7 +36,7 @@ router.get('/cliente/:idCliente',validarAccion,verificador,async (req,res) =>{
     
 });
 
-router.get('/sede/:idSede',validarAccion,verificador,async (req,res) =>{
+router.get('/sede/:idSede',verificador,async (req,res) =>{
     try{
         const { idSede } = req.params;
         const reservaciones = await service.findSede(idSede);
@@ -51,7 +50,7 @@ router.get('/sede/:idSede',validarAccion,verificador,async (req,res) =>{
     
 });
 
-router.post('/filtrar',validarAccion,verificador,async (req,res) =>{
+router.post('/filtrar',verificador,async (req,res) =>{
     try{
         const data = req.body;
         const reservaciones = await service.findFilter(data);
@@ -62,7 +61,7 @@ router.post('/filtrar',validarAccion,verificador,async (req,res) =>{
     
 });
 
-router.post('/crear',validarAccion,verificador,async (req,res) =>{
+router.post('/crear',verificador,async (req,res) =>{
     const body = req.body;
     console.log("creando la reservacion");
     const newReservacion = await service.create(body);
@@ -83,7 +82,7 @@ router.post('/crear',validarAccion,verificador,async (req,res) =>{
     });
 });
 
-router.post('/agregarPlatillo',validarAccion,verificador,async (req,res) =>{
+router.post('/agregarPlatillo',verificador,async (req,res) =>{
     const body = req.body;
     const respuesta = await service.addPlatillo(body);
     let mensaje = "error en agregar platillo";
@@ -94,7 +93,7 @@ router.post('/agregarPlatillo',validarAccion,verificador,async (req,res) =>{
     });
 });
 
-router.put('/atender/:idReservacion',validarAccion,verificador,async (req,res)=>{
+router.put('/atender/:idReservacion',verificador,async (req,res)=>{
 
     try{
         const {idReservacion} = req.params;
@@ -109,7 +108,7 @@ router.put('/atender/:idReservacion',validarAccion,verificador,async (req,res)=>
     
 });
 
-router.get('/validarHorario/:idSede',validarAccion,verificador,async (req,res)=>{
+router.get('/validarHorario/:idSede',verificador,async (req,res)=>{
     const {idSede} = req.params
     const horario = req.body.horario;
 
@@ -123,7 +122,7 @@ router.get('/validarHorario/:idSede',validarAccion,verificador,async (req,res)=>
      
 });
 
-router.get('/detallar/:idReservacion',validarAccion,verificador,async (req,res)=>{
+router.get('/detallar/:idReservacion',verificador,async (req,res)=>{
     const {idReservacion} = req.params;
     let respuesta = await service.detalleReserva(idReservacion);
 
@@ -134,7 +133,7 @@ router.get('/detallar/:idReservacion',validarAccion,verificador,async (req,res)=
 });
 
 
-router.put('/modificar/:idReservacion',validarAccion,verificador,async (req,res)=>{
+router.put('/modificar/:idReservacion',verificador,async (req,res)=>{
 
     // try{
     //     const {idPlatillo} = req.params;
@@ -149,7 +148,7 @@ router.put('/modificar/:idReservacion',validarAccion,verificador,async (req,res)
 });
 
 
-router.delete('/eliminar/:idRservacion',validarAccion,verificador,async (req,res)=>{
+router.delete('/eliminar/:idRservacion',verificador,async (req,res)=>{
     // const {idPlatillo} = req.params;
     // const rpta = await service.delete(idPlatillo);
     // res.json(rpta);
