@@ -4,14 +4,12 @@ const validador = new verify();
 async function validar(req, res, next){
     const bearerHeader = req.headers['authorization'];
     if(typeof bearerHeader !== "undefined"){
-        console.log(bearerHeader);
         const bearer = bearerHeader.split(" ");
         const bearerToken = bearer[1];
         req.token = bearerToken;
         let persona = await validador.validarToken(bearerToken);
         if(persona.length > 0){
             let permiso = true
-            console.log('permiso: ',permiso);
             if(permiso){
                 next();
             }else{

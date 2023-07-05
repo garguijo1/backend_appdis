@@ -6,13 +6,14 @@ class reservasServices{
     }
 
     async create(data){
-        const query = 'INSERT INTO reservaciones(sillas,atendido,id_cliente,id_sede,fecha) VALUES (?,0,?,?,?);'
+        const query = 'INSERT INTO reservaciones(sillas,atendido,id_cliente,id_sede,fecha,hora,estado) VALUES (?,0,?,?,?,?,1);'
         return new Promise((res, rej) =>{
             this.con.query(query,[
                 data.sillas,
                 data.id_cliente,
                 data.id_sede,
-                data.fecha
+                data.fecha,
+                data.hora
             ],(error, data) =>{
                     if(!error){
                         res(data);
@@ -139,42 +140,21 @@ class reservasServices{
         });
     }
 
-    async update(id, changes){
-        // const query = 'UPDATE platillos SET nombre = ?, precio = ? ,descripcion = ?, foto = ? WHERE id_platillo = ?;'
-        // return new Promise((res, rej) =>{
-        //     this.con.query(query,[
-        //         changes.nombre,
-        //         changes.precio,
-        //         changes.descripcion,
-        //         changes.foto,
-        //         id
-        //     ],(error, data) =>{
-        //             if(!error){
-        //                 res(true);
-        //             }else{
-        //                 throw new Error(error.message);
-        //                 rej(false);
-        //             }
-                   
-        //         }
     
-        //     );
-        // });
-    }
 
     async delete(id){
-        // const query = 'DELETE FROM platillos WHERE id_platillo = ?';
-        // return new Promise((res, rej) =>{
-        //     this.con.query(query,[id],
-        //         (error, datos) =>{
-        //             if(!error){
-        //                 res(true);
-        //             }else{
-        //                 res(false);
-        //             }
-        //         }
-        //     );
-        // });
+        const query = 'DELETE FROM reservaciones WHERE id_reservacion = ?';
+        return new Promise((res, rej) =>{
+            this.con.query(query,[id],
+                (error, datos) =>{
+                    if(!error){
+                        res(true);
+                    }else{
+                        res(false);
+                    }
+                }
+            );
+        });
     }
 
     async validarHorario(id_sede,horario){

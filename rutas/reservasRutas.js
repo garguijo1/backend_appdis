@@ -136,9 +136,12 @@ router.get('/detallar/:idReservacion',verificador,async (req,res)=>{
 });
 
 router.delete('/eliminar-reservacion/:idRservacion',verificador,async (req,res)=>{
-    // const {idPlatillo} = req.params;
-    // const rpta = await service.delete(idPlatillo);
-    // res.json(rpta);
+    const {idRservacion} = req.params;
+    const rpta = await service.delete(idRservacion);
+    res.json({
+        estate : rpta,
+        message : rpta ? 'Reservacion eliminada correctamete' : 'No se pudo eliminar la reservacion' 
+    });
 });
 
 
