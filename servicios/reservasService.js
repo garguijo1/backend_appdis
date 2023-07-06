@@ -140,7 +140,15 @@ class reservasServices{
         });
     }
 
-    
+    async cancelar(id){
+        const query = 'UPDATE reservaciones SET estado = 0 WHERE id_reservacion = ?;'
+        return new Promise((res, rej) =>{
+            this.con.query(query,[id],(error, data) =>{
+                    if(!error) res(true);
+                    else rej(false);
+                });
+        });
+    }
 
     async delete(id){
         const query = 'DELETE FROM reservaciones WHERE id_reservacion = ?';

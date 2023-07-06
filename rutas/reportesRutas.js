@@ -6,9 +6,11 @@ const router = express.Router();
 const service = new reportesService();
 
 router.get('/',async (req,res) =>{
-
+    let body = req.body;
+    let respuesta = await service.platillos_mas_solicitados(body.categorias);
     res.json({
-        mensaje : "Hola desde los reportes",
+        mensaje : "platillos mas vendidos",
+        datos : respuesta
     });
 });
 

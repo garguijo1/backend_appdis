@@ -87,12 +87,20 @@ router.post('/crear-reservacion',verificador,async (req,res) =>{
 
 router.post('/agregar-platillos-reservacion',verificador,async (req,res) =>{
     const body = req.body;
-    const respuesta = await service.addPlatillo(body);
-    let mensaje = "error en agregar platillo";
-    if(respuesta) mensaje = "platillo agregado correctamente"
-
+    let status = true;
+    
+    for (let i = 0; i < body.platillos.length; i++) {
+        const pl =  body.platillos[i];
+        let agregar_platillo = {};
+        agregar_platillo.id_reservacion = body.id_reservacion;
+        agregar_platillo.id_platillo    = pl.id_platillo;
+        agregar_platillo.cantidad       = pl.cantidad;
+        const respuesta = await service.addPlatillo(agregar_platillo);
+        if(!respuesta) status = false;
+    };
+    
     res.status(201).json({
-        mensaje: mensaje
+        mensaje: status ? 'agregados correctamente' : 'error al agrear los platillos'
     });
 });
 
@@ -101,8 +109,19 @@ router.put('/atender/:idReservacion',verificador,async (req,res)=>{
     try{
         const {idReservacion} = req.params;
         const body = req.body;
-        const respuesta = await service.atender(idReservacion, body);
-        console.log(respuesta);
+        const respuesta = await service.atender(idReservacion);
+        res.json(respuesta);
+    }catch(error){
+        console.log(error);
+    } 
+});
+
+router.put('/cancelar-reservacion/:idReservacion',verificador,async (req,res)=>{
+
+    try{
+        const {idReservacion} = req.params;
+        const body = req.body;
+        const respuesta = await service.cancelar(idReservacion);
         res.json(respuesta);
     }catch(error){
         console.log(error);
