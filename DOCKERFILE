@@ -1,5 +1,5 @@
 # Establece la imagen base a utilizar
-FROM node:16
+FROM node:16.14.2
 
 # Establece la carpeta de trabajo en el contenedor
 WORKDIR /app
@@ -20,4 +20,4 @@ COPY . .
 EXPOSE 9000
 
 # Ejecuta el proyecto al iniciar el contenedor
-CMD ["npm", "start"]
+CMD [ "node","app.js" ]

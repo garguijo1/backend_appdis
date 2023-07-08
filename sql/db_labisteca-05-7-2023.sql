@@ -13006,5 +13006,5 @@ INSERT INTO `usuarios` VALUES ('31', 'mgarcia', '$argon2id$v=19$m=1024,t=1,p=1$y
 -- View structure for view_personas
 -- ----------------------------
 DROP VIEW IF EXISTS `view_personas`;
-CREATE ALGORITHM=UNDEFINED DEFINER=`root`@`localhost`  VIEW `view_personas` AS SELECT id_cliente as id_persona,id_rol,token FROM clientes UNION
+CREATE  VIEW `view_personas` AS SELECT id_cliente as id_persona,id_rol,token FROM clientes UNION
 SELECT id_usuario, id_rol, token FROM usuarios ;

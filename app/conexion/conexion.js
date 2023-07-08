@@ -16,7 +16,9 @@ con.getConnection(
             }
             if(error.code === 'ECONNREFUSED'){
                 console.error('DATABASE CONNECTION WAS REFUSED');
-            }
+            }else{
+                console.error(error);
+            } 
         }else{
             console.log('Conexion exitosa');
         }
