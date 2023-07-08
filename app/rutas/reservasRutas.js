@@ -85,7 +85,7 @@ router.post('/crear-reservacion',verificador,async (req,res) =>{
     });
 });
 
-router.post('/agregar-platillos-reservacion',verificador,async (req,res) =>{
+router.post('a',verificador,async (req,res) =>{
     const body = req.body;
     let status = true;
     

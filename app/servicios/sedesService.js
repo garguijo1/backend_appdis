@@ -62,7 +62,7 @@ class sedesServices{
     }
 
     async update(id, changes){
-        const query = 'UPDATE sedes SET sede = ?, ubicacion = ?, foto = ? WHERE id_categoria = ?;'
+        const query = 'UPDATE sedes SET sede = ?, ubicacion = ?, foto = ? WHERE id_sede = ?;'
         return new Promise((res, rej) =>{
             this.con.query(query,[
                 changes.sede,
