@@ -23,4 +23,13 @@ router.get('/sede-reservas/:mes',async (req,res) =>{
     });
 });
 
+router.get('/cinco-meses-sede/:idsede',async (req,res) =>{
+    let { idsede } = req.params;
+    let respuesta = await service.cinco_meses_sede(idsede);
+    res.json({
+        mensaje : "ventas por sede",
+        datos : respuesta
+    });
+});
+
 module.exports = router;

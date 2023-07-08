@@ -63,6 +63,27 @@ class reportesService{
             );
         });
     }
+
+    async cinco_meses_sede(id){
+        const query = `SELECT MONTH(fecha) numero_mes,date_format(fecha, '%M' ) mes, count(*) cantidad FROM reservaciones 
+        WHERE id_sede = ?
+        AND MONTH(fecha) <= MONTH(NOW()) 
+        AND MONTH(fecha) > MONTH(NOW()) - 5 
+        AND YEAR(fecha) = YEAR(NOW()) 
+        GROUP BY 1,2`;
+        return new Promise((res, rej) =>{
+            this.con.query(query,[id],
+                (error, datos) =>{
+                    if(!error){
+                        res(datos);
+                    }else{
+                        res(error)
+                    }
+                    
+                }
+            );
+        });
+    }
 }
 
 
