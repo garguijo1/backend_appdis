@@ -8,7 +8,7 @@ class reportesService{
     async platillos_mas_solicitados(categorias){
 
         let str_categorias = '(';
-        if(categorias.length == 0) str_categorias += `SELECT id_categoria FROM categorias`;
+        if(!categorias || categorias.length == 0) str_categorias += `SELECT id_categoria FROM categorias`;
         else{
             categorias.forEach(c => {
                 str_categorias += `${c},`;

@@ -99,7 +99,12 @@ class reservasServices{
     }
 
     async findClient(id){
-        const query = 'SELECT r.id_reservacion,r.sillas,r.atendido,s.sede,s.ubicacion,r.fecha FROM reservaciones as r INNER JOIN sedes as s ON r.id_sede = s.id_sede WHERE r.id_cliente = ?;';
+        const query = `
+        SELECT r.id_reservacion, r.sillas, r.atendido, s.sede, s.ubicacion, DATE_FORMAT(r.fecha, "%d/%m/%Y") fecha, r.fecha AS fecha_orden, r.hora 
+        FROM reservaciones AS r 
+        INNER JOIN sedes as s ON r.id_sede = s.id_sede 
+        WHERE r.id_cliente = ?
+        ORDER BY 7 DESC`;
         return new Promise((res, rej) =>{
             this.con.query(query,[id],
                 (error, datos) =>{
