@@ -45,7 +45,24 @@ class reportesService{
             );
         });
     }
-   
+
+    async reservas_sede(mes){
+        const query = `SELECT r.id_sede, s.sede ,COUNT(*) cantidad FROM reservaciones AS r 
+        JOIN sedes AS s ON r.id_sede = s.id_sede 
+        WHERE MONTH( r.fecha) = ? AND YEAR(r.fecha) = YEAR(NOW()) GROUP BY 1 ORDER BY 3;`;
+        return new Promise((res, rej) =>{
+            this.con.query(query,[mes],
+                (error, datos) =>{
+                    if(!error){
+                        res(datos);
+                    }else{
+                        res(error)
+                    }
+                    
+                }
+            );
+        });
+    }
 }
 
 
