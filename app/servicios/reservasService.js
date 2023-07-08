@@ -28,6 +28,7 @@ class reservasServices{
     }
 
     async addPlatillo(data){
+        console.log('desde el service : ',data)
         const query = 'INSERT INTO reservaciones_platillos(id_platillo,id_reservacion,cantidad) VALUES (?,?,?);'
         return new Promise((res, rej) =>{
             this.con.query(query,[

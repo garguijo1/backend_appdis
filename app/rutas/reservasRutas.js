@@ -85,12 +85,13 @@ router.post('/crear-reservacion',verificador,async (req,res) =>{
     });
 });
 
-router.post('a',verificador,async (req,res) =>{
+router.post('/agregar-platillos-reservacion',verificador,async (req,res) =>{
     const body = req.body;
     let status = true;
     
     for (let i = 0; i < body.platillos.length; i++) {
         const pl =  body.platillos[i];
+        console.log(pl)
         let agregar_platillo = {};
         agregar_platillo.id_reservacion = body.id_reservacion;
         agregar_platillo.id_platillo    = pl.id_platillo;
