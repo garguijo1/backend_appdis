@@ -1,6 +1,6 @@
 const express = require('express');
 const pagosService = require('../servicios/pagosService.js');
-const verificador = require("./../verificaciones//verificador");
+const verificador = require("../verificaciones/verificador.js");
 
 const router = express.Router();
 const service = new pagosService();

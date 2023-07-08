@@ -1,6 +1,6 @@
 const express = require('express');
 const reportesService = require('../servicios/reportesService.js');
-const verificador = require("./../verificaciones//verificador");
+const verificador = require("../verificaciones/verificador.js");
 
 const router = express.Router();
 const service = new reportesService();

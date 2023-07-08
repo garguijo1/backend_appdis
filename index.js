@@ -1,6 +1,6 @@
 const express = require('express');
 const bodyParser = require('body-parser');
-const api = require('./rutas/routes.js');
+const api = require('./app/rutas/routes.js');
 const cors = require('cors');
 
 const app = express();
@@ -28,7 +28,8 @@ const options = {
     }
 }
 
-app.use(cors(options));
+//app.use(cors(options));
+app.use(cors());
 
 
 app.use(express.json());

@@ -1,4 +1,4 @@
-const reservacionesServices = require('./../servicios/reservasService.js');
+const reservacionesServices = require('../../servicios/reservasService.js');
 
 const service = new reservacionesServices();
 
